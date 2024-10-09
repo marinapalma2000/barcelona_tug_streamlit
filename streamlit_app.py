@@ -1,5 +1,6 @@
 import base64
 
+import pandas as pd
 import streamlit as st
 
 import base_datos
@@ -8,6 +9,12 @@ import esta_partida
 
 st.set_page_config(layout="wide")
 
+# Cargar el archivo de Excel
+qa_df = pd.read_excel("content/QA.xlsx")
+
+# Inicializar variables en session_state si no existen
+st.session_state.setdefault("preguntas_restantes", qa_df["Pregunta"].tolist())
+st.session_state.setdefault("preguntas_mostradas", [])
 
 # Función para añadir el fondo
 def set_background(image_file):
